@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Enabling HTTPS for Gitlab pages using Certbot | A Newb's Pen</title><meta name="description" content="Looking to add SSl certificate to your custom domain ? Open post to know how."><meta name="generator" content="A Newb's Pen"><meta name="author" content="Manish Kumar Khedawat"><meta name="keywords" content="pen, notes, coding, developer, mkkhedawat, manish kumar khedawat, javascript, c++, nodejs, angularjs"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><div class="logo"></div><h1><a href="/" alt="A Newb's Pen" title="A Newb's Pen" itemprop="headline">A Newb's Pen</a></h1><p itemprop="description">Let's learn together</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/" alt="home" title="home" itemprop="url">home</a></li><li itemprop="name"><a href="/articles" alt="articles" title="articles" itemprop="url">articles</a></li><li itemprop="name"><a href="/author" alt="author" title="author" itemprop="url">author</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">Enabling HTTPS for Gitlab pages using Certbot</h1><span class="page-tag-anchor"><a href="/tags/https" itemprop="url">#https
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/lets-encrypt" itemprop="url">#lets-encrypt
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/certbot" itemprop="url">#certbot
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/gitlab" itemprop="url">#gitlab
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/ssl" itemprop="url">#ssl
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/web" itemprop="url">#web
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/custom-domain" itemprop="url">#custom-domain
+&nbsp;&nbsp;</a></span><span class="post-meta"></span><br><br><p>In this guide, we will demonstrate how to configure GitLab page (served over custom domain) to use a trusted SSL certificate obtained from Let’s Encrypt. To obtain certificate from Lets’s encrypt, we will be using Certbot previously the Let’s Encrypt Client.</p>
+<h2 id="Pre-requisites"><a href="#Pre-requisites" class="headerlink" title="Pre-requisites"></a>Pre-requisites</h2><p>1: Gitlab page served over custom domain<br>2: Ubuntu PC with working internet connection<br>3: Last but not the least, Time</p>
+<h2 id="Download-CertBot"><a href="#Download-CertBot" class="headerlink" title="Download CertBot"></a>Download CertBot</h2><p>1: clone certbot repo from github</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">git</span> clone https://github.com/certbot/certbot.git
+</code></pre>
+<h2 id="Obtain-SSL-certificate"><a href="#Obtain-SSL-certificate" class="headerlink" title="Obtain SSL certificate"></a>Obtain SSL certificate</h2><p>1: Navigate to directory and run certbot client. Argument to client is your website domain name</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">cd</span> certbot/
+$ ./certbot-auto certonly -a manual -d YOURDOMAIN.com
+</code></pre>
+<p>2: You would see output like below</p>
+<pre class=" language-bash"><code class="language-bash">Requesting root privileges to run certbot<span class="token punctuation">..</span>.
+  /home/ubuntu/.local/share/letsencrypt/bin/letsencrypt certonly -a manual -d YOURDOMAIN.com
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge <span class="token keyword">for</span> YOURDOMAIN.com
+
+-------------------------------------------------------------------------------
+NOTE: The IP of this machine will be publicly logged as having requested this
+certificate. If you\'re running certbot <span class="token keyword">in</span> manual mode on a machine that is not
+your server, please ensure you\'re okay with that.
+
+Are you OK with your IP being logged?
+-------------------------------------------------------------------------------
+<span class="token punctuation">(</span>Y<span class="token punctuation">)</span>es/<span class="token punctuation">(</span>N<span class="token punctuation">)</span>o: Y
+
+-------------------------------------------------------------------------------
+Create a <span class="token function">file</span> containing just this data:
+
+c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU.LeD3Fxv4_XCOs85jzFiYE7yPUr0JLz2c_cYJN1-zSOE
+
+And <span class="token function">make</span> it available on your web server at this URL:
+
+http://YOURDOMAIN.com/.well-known/acme-challenge/c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU
+
+-------------------------------------------------------------------------------
+Press Enter to Continue
+</code></pre>
+<p>3: Now, Add a file named <code>c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU</code> with  content <code>c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU.LeD3Fxv4_XCOs85jzFiYE7yPUr0JLz2c_cYJN1-zSOE</code>, so that it is accessible at <code>http://YOURDOMAIN.com/.well-known/acme-challenge/c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU</code>.<br>Note : Please replace content above with your generated content</p>
+<p>4: [Optional Hint] if you are using dynamic site generation system like hexo, you can also add snippet similar to below to <code>.gitlab-ci.yml</code>.</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">cd</span> public
+$ <span class="token function">mkdir</span> -p .well-known/acme-challenge
+$ <span class="token function">cd</span> .well-known/acme-challenge/
+$ <span class="token keyword">echo</span> <span class="token string">'c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU.LeD3Fxv4_XCOs85jzFiYE7yPUr0JLz2c_cYJN1-zSOE'</span> <span class="token operator">></span> c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU
+</code></pre>
+<p>5: verify that file is accessible at required address using curl in different console</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token variable">$curl</span> http://YOURDOMAIN.com/.well-known/acme-challenge/c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU
+</code></pre>
+<p>  &nbsp;&nbsp;&nbsp;&nbsp; you should see output like below. If not, something is wrong</p>
+<pre class=" language-bash"><code class="language-bash">$ curl http://YOURDOMAIN.com/.well-known/acme-challenge/c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU
+c5uJanKWoIU03m5AAd7HSvcZ7LX_-zlZIj3l768N-oU.LeD3Fxv4_XCOs85jzFiYE7yPUr0JLz2c_cYJN1-zSOE
+</code></pre>
+<p>6: Now return to previous console and press Enter. you should see output :</p>
+<pre class=" language-bash"><code class="language-bash">Press Enter to Continue
+Waiting <span class="token keyword">for</span> verification<span class="token punctuation">..</span>.
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations<span class="token operator">!</span> Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/YOURDOMAIN.com/fullchain.pem
+   Your key <span class="token function">file</span> has been saved at:
+   /etc/letsencrypt/live/YOURDOMAIN.com/privkey.pem
+   Your cert will expire on YYYY-MM-DD. To obtain a new or tweaked
+   version of this certificate <span class="token keyword">in</span> the future, simply run certbot-auto
+   again. To non-interactively renew *all* of your certificates, run
+   <span class="token string">"certbot-auto renew"</span>
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+</code></pre>
+<p>7: If you passed last step, Your SSL certificate is ready.<br>8: visit gitlab &gt; settings &gt; pages  and readd domain. This time add <code>fullchain.pem</code> in <code>Certificate(PEM)</code> field and <code>privkey.pem</code> in <code>Key(PEM)</code> field.<br>9: Hit enter and you are good to go. See your web page being served at : <code>https://YOURDOMAIN.com</code>.</p>
+</article><ins style="display:block" data-ad-client="ca-pub-8265476096138958" data-ad-slot="4564578150" data-ad-format="auto" class="adsbygoogle"></ins><br><br><span class="next-post"><a href="/Installing-and-Using-GoogleTest-with-Visual-Studio/" itemprop="url">Older Post ⇒</a></span><span class="prev-post"><a href="/JavaScript-Call-vs-Apply-vs-Bind/" itemprop="url">⇐ Next Post </a></span><br><section id="comments"><h2>Comments<div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript></div></h2></section></main><script async>(function(h,g,l,k,j,i){j=h.createElement(g),i=h.getElementsByTagName(g)[0],
+j.src = '//' + l + '.disqus.com/' + k + '.js', i.parentNode.insertBefore(j, i)})
+(document,'script','newbs-pen','embed');
+</script><script async>var disqus_shortname = 'newbs-pen';
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+}());
+</script><script async defer src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></body></html>

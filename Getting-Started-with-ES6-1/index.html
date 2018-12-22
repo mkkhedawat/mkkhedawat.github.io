@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Getting Started with ES6 - 1  | A Newb's Pen</title><meta name="description" content="let, const, spread operator, template strings, default params"><meta name="generator" content="A Newb's Pen"><meta name="author" content="Manish Kumar Khedawat"><meta name="keywords" content="pen, notes, coding, developer, mkkhedawat, manish kumar khedawat, javascript, c++, nodejs, angularjs"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><div class="logo"></div><h1><a href="/" alt="A Newb's Pen" title="A Newb's Pen" itemprop="headline">A Newb's Pen</a></h1><p itemprop="description">Let's learn together</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/" alt="home" title="home" itemprop="url">home</a></li><li itemprop="name"><a href="/articles" alt="articles" title="articles" itemprop="url">articles</a></li><li itemprop="name"><a href="/author" alt="author" title="author" itemprop="url">author</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">Getting Started with ES6 - 1 </h1><span class="page-tag-anchor"><a href="/tags/es6" itemprop="url">#es6
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/esma2015" itemprop="url">#esma2015
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/javascript" itemprop="url">#javascript
+&nbsp;&nbsp;</a></span><span class="post-meta"></span><br><br><h2 id="1-The-‘const’-keyword"><a href="#1-The-‘const’-keyword" class="headerlink" title="1. The ‘const’ keyword"></a>1. The ‘const’ keyword</h2><p>Variable declared with const keyword is read only variable. Its value can’t be changed but can be overridden in nested functional scope for local usage.</p>
+<pre class=" language-javascript"><code class="language-javascript"> <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+     count <span class="token operator">=</span> <span class="token number">5</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ <span class="token comment" spellcheck="true">// Output - TypeError: Assignment to constant variable</span>
+
+ <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+     <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token number">5</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ <span class="token comment" spellcheck="true">// Output - Identifier 'count' has already been declared</span>
+
+ <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">const</span> count<span class="token punctuation">;</span>
+     count <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ <span class="token comment" spellcheck="true">// Output - SyntaxError: Missing initializer in const declaration</span>
+
+ <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+     <span class="token keyword">function</span> <span class="token function">otherFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         count <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token function">otherFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ <span class="token comment" spellcheck="true">// Output - TypeError: Assignment to constant variable</span>
+
+ <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">function</span> <span class="token function">otherFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token function">otherFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ <span class="token comment" spellcheck="true">// Output</span>
+ <span class="token comment" spellcheck="true">// 5</span>
+ <span class="token comment" spellcheck="true">// 3</span>
+</code></pre>
+<h2 id="2-The-‘let’-keyword"><a href="#2-The-‘let’-keyword" class="headerlink" title="2. The ‘let’ keyword"></a>2. The ‘let’ keyword</h2><p>‘let’ keyword has local scope within a code block. Variables declared with ‘var’ keyword have functional scope but with ‘let’, variables can have local scope with-in {} brackets .</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> count <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> count <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output - 3</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> count <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> count <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'lcount : '</span> <span class="token operator">+</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'vcount : '</span> <span class="token operator">+</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output</span>
+<span class="token comment" spellcheck="true">// lcount : 2</span>
+<span class="token comment" spellcheck="true">// vcount : 5</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> vcount <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> lcount <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'vcount1 : '</span> <span class="token operator">+</span> vcount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'lcount1 : '</span> <span class="token operator">+</span> lcount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'vcount2 : '</span> <span class="token operator">+</span> vcount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'lcount2 : '</span> <span class="token operator">+</span> lcount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output</span>
+<span class="token comment" spellcheck="true">// vcount1 : 4</span>
+<span class="token comment" spellcheck="true">// lcount1 : 2</span>
+<span class="token comment" spellcheck="true">// vcount2 : 4</span>
+<span class="token comment" spellcheck="true">//ReferenceError: lcount is not defined</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output</span>
+<span class="token comment" spellcheck="true">// 3</span>
+<span class="token comment" spellcheck="true">// 3</span>
+<span class="token comment" spellcheck="true">// 3</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output</span>
+<span class="token comment" spellcheck="true">// 0</span>
+<span class="token comment" spellcheck="true">// 1</span>
+<span class="token comment" spellcheck="true">// 2</span>
+</code></pre>
+<h2 id="3-Default-parameters"><a href="#3-Default-parameters" class="headerlink" title="3. Default parameters"></a>3. Default parameters</h2><p>ES6 allows you to set default arguments in function which will be used as fallback when arguments are not passed in functional call</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">otherFunc</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">otherFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output - undefined</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">otherFunc</span><span class="token punctuation">(</span>data <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">otherFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output - 2</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">otherFunc</span><span class="token punctuation">(</span>data <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">otherFunc</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output - 5</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">otherFunc</span><span class="token punctuation">(</span>data <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">,</span> data2 <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">otherFunc</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output - 7</span>
+
+</code></pre>
+<h2 id="4-The-Spread-Operator"><a href="#4-The-Spread-Operator" class="headerlink" title="4. The Spread Operator"></a>4. The Spread Operator</h2><p>Spread operator takes an array and spread them into individual elements. It is used in places where multiple arguments or variables are expected</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token operator">...</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output</span>
+<span class="token comment" spellcheck="true">// [1, 2, 3]</span>
+<span class="token comment" spellcheck="true">// 1 2 3</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">otherFunc</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token operator">...</span>c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">otherFunc</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output - [3, 4, 5, 6]</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> arr2 <span class="token operator">=</span> <span class="token punctuation">[</span>arr<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> arr3 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>arr<span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output</span>
+<span class="token comment" spellcheck="true">// [Array[3], 4, 5, 6]</span>
+<span class="token comment" spellcheck="true">// [1, 2, 3, 7, 8, 9]</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">otherFunc</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b <span class="token operator">+</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">otherFunc</span><span class="token punctuation">(</span><span class="token operator">...</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output - 6</span>
+</code></pre>
+<p>Once object spread is supported in browsers, One would also be able to spread an object and overwrite properties. (Helpful in partial cloning)</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>
+      name <span class="token punctuation">:</span> <span class="token string">'obj1'</span><span class="token punctuation">,</span>
+      id <span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      length <span class="token punctuation">:</span> <span class="token number">3</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">dir</span><span class="token punctuation">(</span>obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> obj2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token operator">...</span>obj1<span class="token punctuation">,</span> name<span class="token punctuation">:</span><span class="token string">'obj2'</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">dir</span><span class="token punctuation">(</span>obj2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// output</span>
+<span class="token comment" spellcheck="true">// Object</span>
+<span class="token comment" spellcheck="true">//   id: 1</span>
+<span class="token comment" spellcheck="true">//   length: 3</span>
+<span class="token comment" spellcheck="true">//   name: 'obj1'</span>
+<span class="token comment" spellcheck="true">//   __proto__: Object</span>
+<span class="token comment" spellcheck="true">// Object</span>
+<span class="token comment" spellcheck="true">//   id: 1</span>
+<span class="token comment" spellcheck="true">//   length: 3</span>
+<span class="token comment" spellcheck="true">//   name: 'obj2'</span>
+<span class="token comment" spellcheck="true">//   __proto__: Object</span>
+</code></pre>
+<h2 id="5-Template-String"><a href="#5-Template-String" class="headerlink" title="5. Template String"></a>5. Template String</h2><p>Strings defined using ` ` follow line formatting like line breaks. They also support embedded vars via ${myVar}</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token template-string"><span class="token string">`Hello
+                yo
+                `</span></span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output</span>
+<span class="token comment" spellcheck="true">// Hello</span>
+<span class="token comment" spellcheck="true">//  yo</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> name <span class="token operator">=</span> <span class="token string">'Manish'</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token template-string"><span class="token string">`Hello </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> , it's </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token number">8</span><span class="token operator">+</span><span class="token number">2</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> o'clock`</span></span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Output - Hello Manish , it's 10 o'clock</span>
+</code></pre>
+</article><ins style="display:block" data-ad-client="ca-pub-8265476096138958" data-ad-slot="4564578150" data-ad-format="auto" class="adsbygoogle"></ins><br><br><span class="prev-post"><a href="/Getting-Started-with-ES6-2/" itemprop="url">⇐ Next Post </a></span><br><section id="comments"><h2>Comments<div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript></div></h2></section></main><script async>(function(h,g,l,k,j,i){j=h.createElement(g),i=h.getElementsByTagName(g)[0],
+j.src = '//' + l + '.disqus.com/' + k + '.js', i.parentNode.insertBefore(j, i)})
+(document,'script','newbs-pen','embed');
+</script><script async>var disqus_shortname = 'newbs-pen';
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+}());
+</script><script async defer src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></body></html>

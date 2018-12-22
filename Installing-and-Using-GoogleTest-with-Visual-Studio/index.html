@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Installing and Using GoogleTest with Visual Studio | A Newb's Pen</title><meta name="description" content="Step by step instructions to make your c++ application GTest ready"><meta name="generator" content="A Newb's Pen"><meta name="author" content="Manish Kumar Khedawat"><meta name="keywords" content="pen, notes, coding, developer, mkkhedawat, manish kumar khedawat, javascript, c++, nodejs, angularjs"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><div class="logo"></div><h1><a href="/" alt="A Newb's Pen" title="A Newb's Pen" itemprop="headline">A Newb's Pen</a></h1><p itemprop="description">Let's learn together</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/" alt="home" title="home" itemprop="url">home</a></li><li itemprop="name"><a href="/articles" alt="articles" title="articles" itemprop="url">articles</a></li><li itemprop="name"><a href="/author" alt="author" title="author" itemprop="url">author</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">Installing and Using GoogleTest with Visual Studio</h1><span class="page-tag-anchor"><a href="/tags/cplusplus" itemprop="url">#cplusplus
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/google-test" itemprop="url">#google-test
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/unit-testing" itemprop="url">#unit-testing
+&nbsp;&nbsp;</a></span><span class="post-meta"></span><br><br><p>Google C++ Testing Framework ( aka Google Test) is most popular Unit testing framework for C++. This post describes how to install, set up gtest in a c++ project with Visual Studio. Google Mock project has been absorbed into the GoogleTest project, in case you are looking for Google Mock specifically.</p>
+<h2 id="Set-up-Application-Project"><a href="#Set-up-Application-Project" class="headerlink" title="Set up Application Project"></a>Set up Application Project</h2><p>This would be the project will run Unit Test.</p>
+<ol>
+<li>Open Visual Studio, Create new project for console application. Let’s name it MainApp<br> <img src="images/1.png" style="max-width:955px"></li>
+<li>Hit OK and then Finish.</li>
+<li>Just add one print statement in main.cpp and build. If it builds, lets proceed to set up google test.<br> <img src="images/2.png" style="max-width:1088px"></li>
+</ol>
+<h2 id="Install-Google-Test"><a href="#Install-Google-Test" class="headerlink" title="Install Google Test"></a>Install Google Test</h2><ol>
+<li>Download Google Test Framework from <a href="https://github.com/google/googletest/archive/master.zip" target="_blank" rel="noopener">GoogleTest</a> and extract zip.</li>
+<li>Open existing MainApp Solution and add new project. Make sure you choose win32 project and not win32 console application. Lets name it GTestLib.<br> <img src="images/3.png" style="max-width:955px"></li>
+<li>Hit Okay , then Next.</li>
+<li>Select ‘Static Library’ &amp; ‘empty project’ option. Un-check ‘Pre-compiled header’ and hit Finish.</li>
+<li>Now Right click GTestLib and add ‘gtest-all.cc’ to the project. You can find it under ‘googletest-master\googletest\src’.<br> <img src="images/4.png" style="max-width:691px"></li>
+<li>Build GTestLib.</li>
+<li>GTestLib -&gt; Right Click -&gt; properties -&gt; Configuration Properties -&gt; VC++ Directories -&gt; Include Directories. Add include path to ‘googletest-master\googletest\’ and ‘googletest-master\googletest\include’ to resolve build errors.<br> <img src="images/5.png" style="max-width:765px"><br> Note : Include dirs can be added to ‘C/C++ -&gt; General -&gt; Additional Include Directories’ for cleaner solution.</li>
+<li>Build should succeed now. Note the path for build ‘GTestLib.lib’</li>
+<li>Similar setup needs to be done for google-mock if one want to use google-mock. We would limit this article to Google test only.</li>
+</ol>
+<h2 id="Setting-Up-Google-Test-in-Application-Project"><a href="#Setting-Up-Google-Test-in-Application-Project" class="headerlink" title="Setting Up Google Test in Application Project"></a>Setting Up Google Test in Application Project</h2><ol>
+<li>MainApp project -&gt; Right Click -&gt; properties -&gt; Configuration Properties -&gt; VC++ Directories -&gt; Include Directories -&gt; Add ‘googletest-master\googletest\’ and ‘googletest-master\googletest\include’ directories like we did in GtestLib.<br> <img src="images/6.png" style="max-width:758px"></li>
+<li>MainApp project &gt; Right Click -&gt; properties -&gt; Configuration Properties -&gt; VC++ Directories -&gt; Add ‘GTestLib.lib’ path to ‘Library Directories’.<br> <img src="images/7.png" style="max-width:762px"></li>
+<li>Add ‘GTestLib.lib’ in ‘additional dependencies’ available under Linker -&gt; input<br> <img src="images/8.png" style="max-width:766px"></li>
+<li>Now we are ready to write some unit tests.</li>
+<li>Replace your MainApp.cpp content with below code:</li>
+</ol>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stdafx.h"</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stdio.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"gtest/gtest.h"</span></span>
+
+<span class="token keyword">int</span> <span class="token function">isSheldonInsane</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">TEST</span><span class="token punctuation">(</span>BigBangTheory<span class="token punctuation">,</span> isSheldonInsaneTests<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">EXPECT_EQ</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token function">isSheldonInsane</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"I am not insane, My mother had me tested.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Lets ignore him and run Test again to ensure.</span>
+
+    <span class="token keyword">int</span> local_argc <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> local_argv <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    <span class="token operator">::</span>testing<span class="token operator">::</span><span class="token function">InitGoogleTest</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>local_argc<span class="token punctuation">,</span> <span class="token operator">&amp;</span>local_argv<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RUN_ALL_TESTS</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">char</span><span class="token operator">*</span> iAmJustABlockingString <span class="token operator">=</span><span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token function">gets_s</span><span class="token punctuation">(</span>iAmJustABlockingString<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Build and Run, You should see google test being run in console.<br><img src="images/9.png" style="max-width:677px"></p>
+</article><ins style="display:block" data-ad-client="ca-pub-8265476096138958" data-ad-slot="4564578150" data-ad-format="auto" class="adsbygoogle"></ins><br><br><span class="next-post"><a href="/Getting-Started-with-ES6-2/" itemprop="url">Older Post ⇒</a></span><span class="prev-post"><a href="/Enabling-HTTPS-for-Gitlab-pages-using-Certbot/" itemprop="url">⇐ Next Post </a></span><br><section id="comments"><h2>Comments<div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript></div></h2></section></main><script async>(function(h,g,l,k,j,i){j=h.createElement(g),i=h.getElementsByTagName(g)[0],
+j.src = '//' + l + '.disqus.com/' + k + '.js', i.parentNode.insertBefore(j, i)})
+(document,'script','newbs-pen','embed');
+</script><script async>var disqus_shortname = 'newbs-pen';
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+}());
+</script><script async defer src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></body></html>
